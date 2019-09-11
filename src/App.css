@@ -1,0 +1,188 @@
+.content{
+  flex: 1 0 auto;
+  height: auto;
+
+}
+
+.title-font{
+  font-family:Arial, Helvetica, sans-serif
+}
+
+.margins-login{
+  margin-top:27px;
+}
+
+.margins-logo{
+  margin-top: 100px;
+}
+
+ .register{
+  display: none;
+  width: 100%;
+  height:auto;
+} 
+
+.grid{
+  column-gap: 10px;
+  column-count: 3;
+  padding: 175px 20px 10px 20px;
+}
+
+.card-style{
+  width: 18rem;
+  margin-left: 10px;
+  margin-right: 10px;
+  box-shadow: 2px 4px 5px black;
+}
+
+.icon-style{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+#hide{
+  opacity:0;
+}
+
+.addLink:hover{
+  text-decoration: none !important;
+}
+
+.addLink:hover #hide{
+  animation: fadeIn 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+
+.no-list-style{
+  list-style:none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+
+.breadcrumb-item+.breadcrumb-item::before{
+  display: inline-block;
+  padding-right: .5rem;
+  color: #6c757d;
+  content: ">";
+}
+
+.breadcrumb{
+  background-color:transparent !important;
+}
+
+.top-streak{
+  background-color: rgb(167, 167, 167);
+  line-height: 0.5rem;
+}
+
+.edit-link{
+  color: rgb(51, 51, 51);
+}
+
+.edit-link:hover{
+  color: white;
+  text-decoration: none;
+}
+
+p{
+  margin:0;
+}
+
+.img-size{
+  width:100%;
+  height: auto;
+}
+
+.diet-head{
+  background-color:rgb(252, 234, 132);
+}
+
+.diet-head:hover{
+  background-color:rgb(216, 199, 102);
+  cursor:pointer;
+
+}
+
+.diet-bg{
+  background-color: #FFF6C5;
+}
+
+.medicine-head{
+  background-color: rgb(255, 134, 134);
+}
+
+.medicine-head:hover{
+  background-color: rgb(209, 110, 110);
+  cursor:pointer;
+}
+.med-bg{
+  background-color: #FFCECE;
+}
+
+.notes-head{
+  background-color: rgb(180, 206, 255);
+}
+
+.notes-head:hover{
+  background-color: rgb(137, 158, 197);
+  cursor:pointer;
+
+}
+
+.notes-bg{
+  background-color: #E2EEF9;
+}
+
+.horizontalStyling{
+  display: flex;
+  flex-direction: row;
+}
+
+.addPet-bg{
+  background: rgb(255,255,255);
+background: -moz-radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(227,226,226,1) 100%, rgba(217,217,217,1) 100%);
+background: -webkit-radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(227,226,226,1) 100%, rgba(217,217,217,1) 100%);
+background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(227,226,226,1) 100%, rgba(217,217,217,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#d9d9d9",GradientType=1);
+}
+
+.catVac{
+  animation: slide 6s ease-in-out alternate infinite;
+}
+
+.st6{
+  animation: flash 1s ease-in-out alternate infinite;
+}
+
+@keyframes flash{
+  from{
+    fill: red
+  }
+  to{
+    fill: white 
+  }
+}
+
+@keyframes slide{
+  from{transform: translateX(0px);}
+  to {transform: translateX(450px);}
+}
+
+footer{
+  width: 100%;
+  height: 70px;
+  flex-shrink: 0
+}
