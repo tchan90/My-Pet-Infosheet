@@ -5,7 +5,7 @@ export default class Registration extends Component {
   render() {
     return (
         <div>
-        <Container  className="border border-dark mt-3">
+        <Container  className="mt-5">
             <h2 className="py-2 ">Register</h2>
             <Row className="d-flex justify-content-center">
                 <Col lg={8}>
@@ -38,7 +38,7 @@ export default class Registration extends Component {
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
         <div className="d-flex justify-content-end">  
-            <Button variant="primary" type="submit">
+            <Button variant="secondary" type="submit">
           Submit
         </Button></div>
       

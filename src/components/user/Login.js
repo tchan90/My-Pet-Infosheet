@@ -7,7 +7,7 @@ export default class Login extends Component {
             <div>
                  <Container className="margins-login">
                     <Row>
-                        <Col md={6} className="mx-auto">
+                        <Col md={12} className="mx-auto">
                             <Form >
                                 <h2>Login</h2>
                                 <Form.Group className="pt-2">

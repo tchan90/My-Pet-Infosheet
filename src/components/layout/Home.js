@@ -9,12 +9,10 @@ class Home extends Component {
         return (
             <div className="landing-bg">
                 <Container fluid>
-                    <Row>
-                        <Col lg="6"  className="ml-auto">
-                            <div className="d-flex justify-content-center mb-2"> 
-                        <img className="margins-logo" src={logo} alt='logo'/>
-                        </div>
-                    <Login/>
+                    <Row className="vertical-align">
+                        <Col lg="6"  className="ml-auto d-flex flex-column">
+                        <div className="mx-auto"><img src={logo} alt='logo'/> </div>
+                        <div className="mx-auto"><Login/> </div> 
                         </Col>
                     </Row>
                 </Container>

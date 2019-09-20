@@ -14,6 +14,10 @@ import PetCard from './PetCard';
 import {Consumer} from '../../Context'
 
 class PetFile extends Component {
+  state={
+    loading:false
+  }
+
   render() {
     return (
       <Consumer> 
@@ -49,6 +53,12 @@ class PetFile extends Component {
         </Container>
 
         <Container>
+          {this.state.loading ? 
+         <div class="d-flex justify-content-center py-5">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div> :
         <section className="pt-5 pb-3">
           <CardColumns> 
           {pets.map(pet => (
@@ -56,6 +66,7 @@ class PetFile extends Component {
             ))}
         </CardColumns>
         </section>
+         }
         </Container>
         <div className="d-flex justify-content-center pt-4">
             <a href="/addPet" className="addLink">

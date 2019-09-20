@@ -7,12 +7,12 @@ class Navigation extends Component {
         return (
             <div>
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-  <Navbar.Brand href="/user" className="title-font">My Pet Infosheet</Navbar.Brand>
+  <Navbar.Brand href="/user">My Pet Infosheet</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="ml-auto">
       <Nav.Link href="/user">Profile</Nav.Link>
-      <Nav.Link eventKey={2} href="#">
+      <Nav.Link eventKey={2} href="/about">
         About
       </Nav.Link>
       <Nav.Link eventKey={4} href="/">

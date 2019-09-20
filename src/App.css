@@ -4,10 +4,12 @@
 
 }
 
-.title-font{
-  font-family:Arial, Helvetica, sans-serif
+.vertical-align{
+  min-height:100%;
+  min-height:100vh;
+  display: flex;
+  align-items:center;
 }
-
 
 .landing-bg{
   background:url('./img/landing-bg.png');
@@ -35,6 +37,10 @@
   column-gap: 10px;
   column-count: 3;
   padding: 175px 20px 10px 20px;
+}
+
+.about-jumbo{
+  background-color: rgb(190, 229, 255);
 }
 
 .card-style{
@@ -99,6 +105,9 @@
 
 .edit-link{
   color: rgb(51, 51, 51);
+  display:inline-block;
+  padding-left:5px;
+  padding-right:5px;
 }
 
 .edit-link:hover{
@@ -192,7 +201,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endCo
 
 footer{
   width: 100%;
-  height: 20px;
+  height: 50px;
   flex-shrink: 0;
   background-color:rgba(255, 255, 255, 0.3)
 }

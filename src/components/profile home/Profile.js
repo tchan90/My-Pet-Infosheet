@@ -21,6 +21,7 @@ import {Consumer} from '../../Context'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDog,
+  faCat,
   faComment,
   faPlusCircle,
   faBriefcaseMedical,
@@ -76,11 +77,19 @@ class Profile extends Component {
               </div>
               <Container className="mt-4 border border-dark">
                 <header>
-                  <Row className="top-streak d-flex flex-row justify-content-between align-items-between py-3 px-3">
-                    <FontAwesomeIcon icon={faDog} />
+                  <Row className="top-streak d-flex flex-row justify-content-between py-3 px-3">
+                    {pets.map(pet => (
+                    <FontAwesomeIcon icon={`${pet.animal}` === 'Dog' ? faDog : faCat } />
+                    ))}
+                    <div className="d-flex"> 
+                      <a href="/edit" className="edit-link">
+                      <p className="text-right">Edit</p>
+                    </a>
                     <a href="#" className="edit-link">
                       <p className="text-right">Delete</p>
-                    </a>
+                    </a> 
+                    </div>
+                    
                   </Row>
                   <Row className="bg-white">
                     <Col>
