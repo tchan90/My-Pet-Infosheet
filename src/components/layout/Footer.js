@@ -4,7 +4,7 @@ export default class Footer extends Component {
     render() {
         return (
             <div>
-                <footer className="bg-dark text-white text-center pt-3">
+                <footer className="text-black text-center py-3">
                     Copyright 2019
                 </footer>
             </div>

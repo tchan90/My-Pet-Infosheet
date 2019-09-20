@@ -11,12 +11,9 @@ class Navigation extends Component {
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="ml-auto">
-      <Nav.Link href="#">Profile</Nav.Link>
+      <Nav.Link href="/user">Profile</Nav.Link>
       <Nav.Link eventKey={2} href="#">
         About
-      </Nav.Link>
-      <Nav.Link eventKey={3} href="#">
-        Contact
       </Nav.Link>
       <Nav.Link eventKey={4} href="/">
         Log Out

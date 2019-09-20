@@ -8,6 +8,7 @@ import Navigation from './components/layout/Nav';
 import PetFile from './components/profile home/PetFile';
 import AddPet from './components/profile home/AddPet';
 import Profile from './components/profile home/Profile';
+import Register from './components/user/Registration';
 import Error from './components/Error'
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
        <Switch> 
        <Route path="/" exact component={Home} />
        <Route path="/user" exact component={PetFile} />
+       <Route path="/register" exact component={Register} />
        <Route path="/addPet" exact component={AddPet} />
        <Route path="/user/:petId" exact component={Profile} />
        <Route component={Error} />
