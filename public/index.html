@@ -30,4 +30,27 @@
             });
     </script>
   </body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAynjiWLcJVXCc-BKoHDiXr9gKi26_Ir-M",
+    authDomain: "my-pet-infosheet.firebaseapp.com",
+    databaseURL: "https://my-pet-infosheet.firebaseio.com",
+    projectId: "my-pet-infosheet",
+    storageBucket: "my-pet-infosheet.appspot.com",
+    messagingSenderId: "631975604357",
+    appId: "1:631975604357:web:d80f12fa0f74842fbbf9ec",
+    measurementId: "G-7JFTJ17Y4J"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 </html>

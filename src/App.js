@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {Provider} from './Context'
+import {Provider} from 'react-redux';
+import store from './store';
 
 import Home from './components/layout/Home';
 import About from './components/About'
@@ -17,7 +18,7 @@ class App extends Component {
   render() { 
   return (
       <Router> 
-        <Provider>
+        <Provider store={store}>
       <div className="content"> 
        <Navigation />
        <Switch> 
