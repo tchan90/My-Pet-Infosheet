@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { Form, Col, Container, Breadcrumb } from "react-bootstrap";
-import uuid from 'uuid';
 import classnames from 'classnames';
-import {connect} from 'react-redux';
+import {firestoreConnect} from 'react-redux-firebase';
 import PropTypes from 'prop-types';
-import {addPet} from '../../actions/petActions';
-import AddDiet from '../add sections/AddDiet'
 
 class AddPet extends Component {
   state={
@@ -18,15 +15,9 @@ class AddPet extends Component {
     thumbnail:'',
     diettype:'',
     dietname:'',
-    mealtimes:'',
-    volume:'',
-    volumemeasure:'',
     dietother:'',
     medtype:'',
     medname:'',
-    medfreq:'',
-    medroute:'',
-    medhour:'',
     mednotes:'',
     note:'',
     photo:'',
@@ -38,71 +29,60 @@ onChange= e => this.setState({[e.target.name]:e.target.value})
 
 onSubmit=(e) => {
   e.preventDefault();
-  const {animal, name, breed, sex, dob, thumbnail, diettype, dietname, mealtimes, volume, volumemeasure, dietother, medtype, medname, medfreq, medroute, medhour, mednotes, note, photo} = this.state;
+  const newPet = this.state;
   //check errors
-  if(animal ===''){
-    this.setState({
-      errors:{animal:'Please select the species'}
-    });
-    return;
-  }
-  if(name ===''){
-    this.setState({
-      errors:{name:'Name is required'}
-    });
-    return;
-  }
-  if(breed ===''){
-    this.setState({
-      errors:{breed:'Breed is required'}
-    });
-    return;
-  }
-  if(sex ===''){
-    this.setState({
-      errors:{sex:'Please make a selection'}
-    });
-    return;
-  }
-
-  const newPet  = {
-    id: uuid(), animal, name, breed, sex, dob, thumbnail, diettype, dietname, mealtimes, volume, volumemeasure, dietother, medtype, medname, medfreq, medroute, medhour, mednotes, note, photo
-  };
-  
-  //Submit Pet
-  this.props.addPet(newPet)
+  //if(animal ===''){
+  //  this.setState({
+  //    errors:{animal:'Please select the species'}
+  //  });
+  //  return;
+  //}
+  //if(name ===''){
+  //  this.setState({
+  //    errors:{name:'Name is required'}
+  //  });
+  //  return;
+  //}
+  //if(breed ===''){
+  //  this.setState({
+  //    errors:{breed:'Breed is required'}
+  //  });
+  //  return;
+  //}
+  //if(sex ===''){
+  //  this.setState({
+  //    errors:{sex:'Please make a selection'}
+  //  });
+  //  return;
+  //}
+  const{firestore} = this.props;
+  firestore.add({collection:'pets'}, newPet)
 
   //clear state after submission
-  this.setState({
-    animal:'',
-    name:'',
-    breed:'',
-    sex:'',
-    dob:'',
-    age:'',
-    thumbnail:'',
-    diettype:'',
-    dietname:'',
-    mealtimes:'',
-    volume:'',
-    volumemeasure:'',
-    dietother:'',
-    medtype:'',
-    medname:'',
-    medfreq:'',
-    medroute:'',
-    medhour:'',
-    mednotes:'',
-    note:'',
-    photo:'',
-    errors: {}
-});
+    //this.setState({
+    //animal:'',
+    //name:'',
+    //breed:'',
+    //sex:'',
+    //dob:'',
+    //age:'',
+    //thumbnail:'',
+    //diettype:'',
+    //dietname:'',
+    //dietother:'',
+    //medtype:'',
+    //medname:'',
+    //mednotes:'',
+    //note:'',
+    //photo:'',
+    //errors: {}
+    //});
 //redirect to home page
-this.props.history.push("/user");
+.then(()=> this.props.history.push('/user'))
 };
 
   render() {
-    const {animal, name, breed, sex, dob, age, thumbnail, diettype, dietname, mealtimes, volume, volumemeasure, dietother, medtype, medname, medfreq, medroute, medhour, mednotes, note, photo, errors} = this.state;
+    const {animal, name, breed, sex, dob, age, thumbnail, diettype, dietname, dietother, medtype, medname, mednotes, note, photo, errors} = this.state;
     return (
       <div className="addPet-bg">
       <div className="pl-3">
@@ -179,27 +159,8 @@ this.props.history.push("/user");
               <Form.Control type="text" name="dietname" placeholder="eg Royal Canin Puppy Dry" value={dietname} onChange={this.onChange} />
             </Form.Group>
             <Form.Row>
-              <Form.Group as={Col} md="4">
-              <Form.Label>Frequency</Form.Label>
-              <div className="d-flex flex-row justify-content-between align-items-start">
-              <Form.Control type="number" name="mealtimes" placeholder="eg 2" value={mealtimes} onChange={this.onChange}/> <p className="ml-2"> times a day</p>
-              </div>
-              </Form.Group>
-              <Form.Group as={Col} md="4" className="ml-5">
-              <Form.Label>Volume</Form.Label>
-              <div className="d-flex flex-row justify-content-between align-items-start">
-              <Form.Control type="number" name="volume" placeholder="eg 2" value={volume} onChange={this.onChange}/>  
-              <Form.Control as="select" name="volumemeasure" value={volumemeasure} onChange={this.onChange}>
-                <option>...</option>
-                <option>cup/s</option>
-                <option>treat/s</option>
-              </Form.Control>
-              </div>
-              </Form.Group>
-            </Form.Row>
-            <Form.Row>
               <Form.Group as={Col} md="6" className="pb-5">
-                <Form.Label>Other</Form.Label>
+                <Form.Label>Notes</Form.Label>
                 <Form.Control as="textarea" rows="3" name="dietother" placeholder="Other notes you want to include" value={dietother} onChange={this.onChange}/>
                 </Form.Group>
             </Form.Row>
@@ -230,27 +191,6 @@ this.props.history.push("/user");
               </ Form.Group>
               </Form.Row>
               <Form.Row> 
-              <Form.Group as={Col} md="4"  className="pb-5">
-              <Form.Label>Frequency</Form.Label>
-              <Form.Control type="text" name="medfreq" placeholder="eg Once a month"  value={medfreq} onChange={this.onChange}/>
-              </ Form.Group>
-              <Form.Group as={Col} md="4">
-              <Form.Label>Route</Form.Label>
-              <Form.Control as="select" name="medroute" value={medroute} onChange={this.onChange}>
-                <option>...</option>
-                <option>Orally</option>
-                <option>Topical</option>
-                <option>Injected</option>
-                <option>Placed in the eye</option>
-                <option>Placed in ears</option>
-                <option>Inhaled</option>
-              </Form.Control>
-              </ Form.Group>
-              <Form.Group as={Col} md="2" className="pt-4 ml-3">
-              <div className="d-flex flex-row justify-content-between align-items-start">
-              <p>every</p> <Form.Control type="number" name="medhour" className="mx-2" value={medhour} onChange={this.onChange}/> <p>hours</p>
-              </div>
-              </Form.Group>
               <Form.Group as={Col} md="6" className="pb-5">
                 <Form.Control as="textarea" rows="3" name="mednotes" placeholder="Other notes you want to include" value={mednotes} onChange={this.onChange}/>
                 </Form.Group>
@@ -285,4 +225,4 @@ AddPet.propTypes={
   addPet: PropTypes.func.isRequired
 }
 
-export default connect(null, {addPet})(AddPet);
+export default firestoreConnect()(AddPet);

@@ -1,30 +1,28 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {firestoreConnect} from 'react-redux-firebase';
+import PropTypes from 'prop-types';
 import {
   Container,
   Row,
   Col,
   Form,
   InputGroup,
-  CardColumns
+  CardColumns,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import PetCard from './PetCard';
-import {connect} from 'react-redux';
-import {getPets} from '../../actions/petActions';
+
+
 
 class PetFile extends Component {
-  state={
-    loading:false
-  }
-  componentDidMount(){
-    this.props.getPets();
-  }
-
 render(){
-  const {pets} = this.props;
-  return(
+  const {animals} = this.props;
+  if(animals){
+    return( 
 <div>
   <Container>
     <Row className="no-gutters">
@@ -52,39 +50,41 @@ render(){
       </Col>
     </Row>
   </Container>
-
-  <Container>
-    {this.state.loading ? 
-   <div class="d-flex justify-content-center py-5">
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div> :
+  <Container> 
   <section className="pt-5 pb-3">
     <CardColumns> 
-    {pets.map(pet => (
-         <PetCard key = {pet.id} pet = {pet} />
-      ))}
+    {animals.map(animal => (
+         <PetCard key = {animal.id} pet = {animal} />
+    ))}
+    
   </CardColumns>
   </section>
-   }
   </Container>
   <div className="d-flex justify-content-center pt-4">
       <a href="/addPet" className="addLink">
-        <div className="icon-style"><FontAwesomeIcon size="3x" icon={faPlusCircle}/> </div>
-        
+        <div className="icon-style"><FontAwesomeIcon size="3x" icon={faPlusCircle}/> </div>        
       <div id="hide" className="py-2"> <p>Add pet</p></div>
-      </a>
-       
+      </a>      
   </div>
 </div>
-  )
+)
+  }else{
+    return <div class="d-flex justify-content-center py-5">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div> 
+  }
   
 }
 }
-
-const mapStateToProps = state => ({
-  pets: state.pet.pets
-})
-
-export default connect(mapStateToProps, {getPets})(PetFile);
+PetFile.propTypes={
+  firestore: PropTypes.object.isRequired,
+  animals: PropTypes.array
+}
+export default compose(
+  firestoreConnect([{collection:'animals'}]),
+connect((state,props)=>({
+  animals:state.firestore.ordered.animals
+}))
+)(PetFile);

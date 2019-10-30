@@ -98,6 +98,10 @@
   background-color:transparent !important;
 }
 
+.heading-profile{
+  background-color:rgb(230, 230, 230);
+}
+
 .top-streak{
   background-color: rgb(167, 167, 167);
   line-height: 0.5rem;
@@ -122,6 +126,11 @@ p{
 .img-size{
   width:100%;
   height: auto;
+}
+
+.gen-border{
+  border:1px solid rgb(185, 185, 185);
+  border-radius:4px;
 }
 
 .diet-head{

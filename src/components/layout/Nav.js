@@ -12,10 +12,11 @@ class Navigation extends Component {
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="ml-auto">
       <Nav.Link href="/user">Profile</Nav.Link>
-      <Nav.Link eventKey={2} href="/about">
+      <Nav.Link href="/owner">Owner Info</Nav.Link>
+      <Nav.Link href="/about">
         About
       </Nav.Link>
-      <Nav.Link eventKey={4} href="/">
+      <Nav.Link  href="/">
         Log Out
       </Nav.Link>
     </Nav>
