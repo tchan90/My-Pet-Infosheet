@@ -2,50 +2,34 @@ import React, { Component } from 'react'
 import {
     Table,
   } from "react-bootstrap";
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import {faTimes, faPenNib} from "@fortawesome/free-solid-svg-icons";
 
 class Medicine extends Component {
-  static propTypes={
-    medtype:PropTypes.string.isRequired,
-    medname:PropTypes.string.isRequired,
-    medfreq:PropTypes.string.isRequired,
-    medroute:PropTypes.string.isRequired,
-    mednotes:PropTypes.string.isRequired,
-}
     render() {
-        const {medication} = this.props;
+        const {name, type, notes} = this.props;
         return (
           <div>
-            {medication.map(meds=>(
               <div className="mt-2 p-3 bg-white">
-              <div className="d-flex align-items-stretch"> 
-              <h4 className="w-100">{meds.medtype}</h4>
-              <FontAwesomeIcon icon={faTimes} className="flex-shrink-1" />
-              </div>
+              <div className="d-flex justify-content-between"> 
+                       <div><h4>{type}</h4> </div>
+                       <div><span className="mx-4"><FontAwesomeIcon icon={faPenNib} /></span>
+                     <span><FontAwesomeIcon icon={faTimes} /></span>
+                      </div>
+                       </div> 
               <Table>
                 <tbody>
                   <tr>
                     <td className="font-weight-bold">Name:</td>
-                    <td>{meds.medname}</td>
-                  </tr>
-                  <tr>
-                    <td className="font-weight-bold">Frequency:</td>
-                    <td>{meds.medfreq}</td>
-                  </tr>
-                  <tr>
-                    <td className="font-weight-bold">Route:</td>
-                    <td>{meds.medroute}</td>
+                    <td>{name}</td>
                   </tr>
                   <tr>
                     <td className="font-weight-bold">Notes:</td>
-                    <td>{meds.mednotes}</td>
+                    <td>{notes}</td>
                   </tr>
                 </tbody>
               </Table>
             </div>
-            ))}
                 </div>
         )
     }

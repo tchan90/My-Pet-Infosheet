@@ -1,55 +1,53 @@
 import React, { Component } from 'react'
-import {Container, Col, Form} from 'react-bootstrap'
-import {Consumer} from '../../Context'
+import {Container, Col, Form,Breadcrumb} from 'react-bootstrap'
+import PropTypes from 'prop-types';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import {firestoreConnect} from 'react-redux-firebase';
 
  class AddDiet extends Component {
    state={
     diettype:'',
     dietname:'',
-    mealtimes:'',
-    volume:'',
-    volumemeasure:'',
     dietother:'',
    }
 
-   onChange=(e) => {
-    this.setState({[e.target.name]:e.target.value})
-   }
-
-   onSubmit=(dispatch, e)=> {
-     e.preventDefault();
-     const {diettype, dietname, mealtimes, volume, volumemeasure, dietother} = this.state;
-
-     const newDiet = {
-      diettype, dietname, mealtimes, volume, volumemeasure, dietother
-     };
-
-     dispatch({type: "ADD_DIET", payload:newDiet})
-     //clear state after submission
-     this.setState({
-      diettype:'',
-      dietname:'',
-      mealtimes:'',
-      volume:'',
-      volumemeasure:'',
-      dietother:''
-     });
+   onChange=(e)=>{
+    this.setState({[e.target.name]: e.target.value})
+  }
   
-   };
+  onSubmit=(e) => {
+    e.preventDefault();
+   const newDiet = this.state;
+   // store
+   //.firestore()
+   //.collection("animals")
+   //.doc(this.props.match.params.id)
+   //.collection("diet")
+   //.add(newDiet)
+  const{firestore} = this.props;
+  firestore.add({collection:'animals', doc:this.props.match.params.id, subcollections:[{ collection: 'diet' }] }, newDiet)
+  .then(()=> this.props.history.push('/user'))
+  };
    
     render() {
+      const {diettype, dietname, dietother} = this.state;
+      const {pet} = this.props;
         return (
-          <Consumer>
-            {value => {
-              const {dispatch} = value;
-              return(
-                <Container>
-                <Form className="bg-light px-3 py-3" onSubmit={this.onSubmit.bind(this,dispatch)}>
+          <div>
+          <Breadcrumb>
+          <Breadcrumb.Item href="/user">All Pets</Breadcrumb.Item> 
+          {pet ? <Breadcrumb.Item href={`/pet/${pet.id}`}>{pet.name}</Breadcrumb.Item>:<p>No name</p>} 
+    <Breadcrumb.Item active>Add Diet</Breadcrumb.Item>
+       </Breadcrumb>
+                <Container className="my-5">
+                <h1>Add Diet</h1>
+                <Form className="bg-light px-3 py-3" onSubmit={this.onSubmit}>
                 <Form.Row>
                     <Col lg={6}>
                     <Form.Group>
                    <Form.Label>Meal Type</Form.Label>
-                   <Form.Control as="select" name="diettype" value={this.state.diettype} onChange={this.onChange}>
+                   <Form.Control as="select" name="diettype" value={diettype} onChange={this.onChange}>
                         <option>...</option>
                         <option>Main</option>
                         <option>Snack</option>
@@ -59,41 +57,31 @@ import {Consumer} from '../../Context'
                     </Form.Row>
                     <Form.Group>
                     <Form.Label>Name</Form.Label>
-                      <Form.Control type="text" name="dietname" placeholder="eg Royal Canin Puppy Dry" value={this.state.dietname} onChange={this.onChange} />
+                      <Form.Control type="text" name="dietname" placeholder="eg Royal Canin Puppy Dry" value={dietname} onChange={this.onChange} />
                     </Form.Group>
-                    <Form.Row>
-                      <Form.Group as={Col} md="4">
-                      <Form.Label>Frequency</Form.Label>
-                      <div className="d-flex flex-row justify-content-between align-items-start">
-                      <Form.Control type="number" name="mealtimes" placeholder="eg 2" value={this.state.mealtimes} onChange={this.onChange}/> <p className="ml-2"> times a day</p>
-                      </div>
-                      </Form.Group>
-                      <Form.Group as={Col} md="4" className="ml-5">
-                      <Form.Label>Volume</Form.Label>
-                      <div className="d-flex flex-row justify-content-between align-items-start">
-                      <Form.Control type="number" name="volume" placeholder="eg 2" value={this.state.volume} onChange={this.onChange}/>  
-                      <Form.Control as="select" name="volumemeasure" value={this.state.volumemeasure} onChange={this.onChange}>
-                        <option>...</option>
-                        <option>cup/s</option>
-                        <option>treat/s</option>
-                      </Form.Control>
-                      </div>
-                      </Form.Group>
-                    </Form.Row>
                     <Form.Row>
                       <Form.Group as={Col} md="6" className="pb-5">
                         <Form.Label>Other</Form.Label>
-                        <Form.Control as="textarea" rows="3" name="dietother" placeholder="Other notes you want to include" value={this.state.dietother} onChange={this.onChange}/>
+                        <Form.Control as="textarea" rows="3" name="dietother" placeholder="Other notes you want to include" value={dietother} onChange={this.onChange}/>
                         </Form.Group>
                     </Form.Row>
               <button type="submit" value ="Add Diet" name="adddiet" class="btn btn-secondary mr-2">Submit</button>
                 </Form>
             </Container>
-              )
-            }}
-          </Consumer>  
+            </div>
         )
     }
 }
-
-export default AddDiet
+AddDiet.propTypes={  
+  AddDiet: PropTypes.func.isRequired
+}
+export default compose(
+  //props store as ID
+  firestoreConnect(props=>[
+      {collection: 'animals', storeAs:'pet', doc:props.match.params.id,}
+  ]),
+  //retrieve by ID - destructuring
+  connect(({firestore:{ordered}},props)=>({
+      pet:ordered.pet && ordered.pet[0],
+  }))
+)(AddDiet)

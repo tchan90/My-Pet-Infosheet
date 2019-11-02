@@ -179,11 +179,9 @@ p{
 }
 
 .addPet-bg{
-  background: rgb(255,255,255);
-background: -moz-radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(227,226,226,1) 100%, rgba(217,217,217,1) 100%);
-background: -webkit-radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(227,226,226,1) 100%, rgba(217,217,217,1) 100%);
-background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(227,226,226,1) 100%, rgba(217,217,217,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#d9d9d9",GradientType=1);
+  background: rgb(236, 236, 236);
+padding: 30px 30px 30px 30px;
+border-radius:5px;
 }
 
 .catVac{

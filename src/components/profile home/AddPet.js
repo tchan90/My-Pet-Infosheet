@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import {compose} from 'redux';
 import { Form, Col, Container, Breadcrumb } from "react-bootstrap";
 import classnames from 'classnames';
-import {firestoreConnect} from 'react-redux-firebase';
 import PropTypes from 'prop-types';
 
 class AddPet extends Component {
@@ -13,78 +13,50 @@ class AddPet extends Component {
     dob:'',
     age:'',
     thumbnail:'',
-    diettype:'',
-    dietname:'',
-    dietother:'',
-    medtype:'',
-    medname:'',
-    mednotes:'',
-    note:'',
-    photo:'',
-    errors: {}
+    errors:{}
 }
-
-onChange= e => this.setState({[e.target.name]:e.target.value})
-
+onChange=(e)=>{
+  this.setState({[e.target.name]: e.target.value})
+}
 
 onSubmit=(e) => {
   e.preventDefault();
-  const newPet = this.state;
+  const { name, animal, breed, sex, dob, thumbnail } = this.state;
   //check errors
-  //if(animal ===''){
-  //  this.setState({
-  //    errors:{animal:'Please select the species'}
-  //  });
-  //  return;
-  //}
-  //if(name ===''){
-  //  this.setState({
-  //    errors:{name:'Name is required'}
-  //  });
-  //  return;
-  //}
-  //if(breed ===''){
-  //  this.setState({
-  //    errors:{breed:'Breed is required'}
-  //  });
-  //  return;
-  //}
-  //if(sex ===''){
-  //  this.setState({
-  //    errors:{sex:'Please make a selection'}
-  //  });
-  //  return;
-  //}
+  if(animal ===''){
+    this.setState({
+      errors:{animal:'Please select the species'}
+    });
+    return;
+  }
+  if(name ===''){
+    this.setState({
+      errors:{name:'Name is required'}
+    });
+    return;
+  }
+  if(breed ===''){
+    this.setState({
+      errors:{breed:'Breed is required'}
+    });
+  return;
+  }
+  if(sex ===''){
+    this.setState({
+      errors:{sex:'Please make a selection'}
+    });
+    return;
+  }
+  const newPet = {name, animal, breed, sex, dob, thumbnail};
   const{firestore} = this.props;
-  firestore.add({collection:'pets'}, newPet)
-
-  //clear state after submission
-    //this.setState({
-    //animal:'',
-    //name:'',
-    //breed:'',
-    //sex:'',
-    //dob:'',
-    //age:'',
-    //thumbnail:'',
-    //diettype:'',
-    //dietname:'',
-    //dietother:'',
-    //medtype:'',
-    //medname:'',
-    //mednotes:'',
-    //note:'',
-    //photo:'',
-    //errors: {}
-    //});
-//redirect to home page
+  firestore.add({collection:'animals'}, newPet)
 .then(()=> this.props.history.push('/user'))
 };
 
   render() {
-    const {animal, name, breed, sex, dob, age, thumbnail, diettype, dietname, dietother, medtype, medname, mednotes, note, photo, errors} = this.state;
+    const {name, animal, breed, sex, dob, thumbnail, errors} = this.state;
     return (
-      <div className="addPet-bg">
+      <div>
       <div className="pl-3">
         <Breadcrumb>
           <Breadcrumb.Item href="/user">All Pets</Breadcrumb.Item>
@@ -92,9 +64,9 @@ onSubmit=(e) => {
         </Breadcrumb>
       </div>
       <h1 className="pt-4 pl-4">Add Pet</h1>
-      <Container className="mt-5">
+      <Container className="my-5 addPet-bg">
         {/*General*/}
-        <h3>General</h3>
+        <h3>Basic Information</h3>
         <p className="pb-3">* fields must be filled</p>
         <Form  onSubmit={this.onSubmit}>
         <Form.Group as={Col}>
@@ -109,19 +81,19 @@ onSubmit=(e) => {
           <Form.Row>
             <Form.Group as={Col}>
               <Form.Label>Name*</Form.Label>
-              <Form.Control type="text" name="name" placeholder="eg Fluffy" value={name} onChange={this.onChange} className={classnames({'is-invalid':errors.name})} />
+              <Form.Control type="text" name="name" placeholder="eg Fluffy" value={name} onChange={this.onChange} className={classnames({'is-invalid':errors.name})}/>
               {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </Form.Group>
             <Form.Group as={Col}>
               <Form.Label>Breed*</Form.Label>
-              <Form.Control type="text" name="breed" placeholder="eg Poodle" value={breed} onChange={this.onChange} className={classnames({'is-invalid':errors.breed})} />
+              <Form.Control type="text" name="breed" placeholder="eg Poodle" value={breed} onChange={this.onChange} className={classnames({'is-invalid':errors.breed})}/>
               {errors.breed && <div className="invalid-feedback">{errors.breed}</div>}
             </Form.Group>
           </Form.Row>
           <Form.Row>
             <Form.Group as={Col}  className="pb-5">
               <Form.Label>Sex*</Form.Label>
-              <Form.Control as="select" name="sex" value={sex} onChange={this.onChange} errors={errors.sex} className={classnames({'is-invalid':errors.sex})}>
+              <Form.Control as="select" name="sex" value={sex} onChange={this.onChange} className={classnames({'is-invalid':errors.sex})}>
                 <option>...</option>
                 <option>Female Entire</option>
                 <option>Female Desexed</option>
@@ -134,83 +106,11 @@ onSubmit=(e) => {
               <Form.Label>Date of Birth {'(eg 09/02/2012)'}</Form.Label>
               <Form.Control type="date" name="dob" value={dob} onChange={this.onChange} />
             </Form.Group>
-          <Form.Group>
-          <label for="exampleFormControlFile1">Upload Profile Picture</label>
-  <input type="file" name="thumbnail" class="form-control-file" value={thumbnail} onChange={this.onChange}/>
-      <small> Keep images to around 554px x 370px  </small>
-          </Form.Group>
-          </Form.Row>
-         {/*Diet*/}
-          <h3 className="border-top pt-5 pb-3" >Diet</h3>
-          <Form.Row>
-            <Col lg={6}>
-            <Form.Group>
-           <Form.Label>Meal Type</Form.Label>
-           <Form.Control as="select" name="diettype" value={diettype} onChange={this.onChange}>
-                <option>...</option>
-                <option>Main</option>
-                <option>Snack</option>
-              </Form.Control>
-         </Form.Group>
-            </Col>
-            </Form.Row>
-            <Form.Group>
-            <Form.Label>Name</Form.Label>
-              <Form.Control type="text" name="dietname" placeholder="eg Royal Canin Puppy Dry" value={dietname} onChange={this.onChange} />
-            </Form.Group>
-            <Form.Row>
-              <Form.Group as={Col} md="6" className="pb-5">
-                <Form.Label>Notes</Form.Label>
-                <Form.Control as="textarea" rows="3" name="dietother" placeholder="Other notes you want to include" value={dietother} onChange={this.onChange}/>
-                </Form.Group>
-            </Form.Row>
-         {/*Medicine*/}
-        <h3 className="border-top pt-5 pb-3">Medicine</h3>
-        <Form.Row>
-        <Form.Group as={Col} md="6"> 
-        <Form.Label>Type</Form.Label>
-      <Form.Control as="select" name="medtype" value={medtype} onChange={this.onChange}>
-                <option>...</option>
-                <option>Parasite Control</option>
-                <option>Heart</option>
-                <option>Skin</option>
-                <option>Ears</option>
-                <option>Stomach</option>
-                <option>Immune System</option>
-                <option>Musculo-Skeletal</option>
-                <option>Kidneys</option>
-                <option>Liver</option>
-                <option>Hormonal</option>
-              </Form.Control>
-              </Form.Group>
-              </Form.Row>
-              <Form.Row> 
-              <Form.Group as={Col} md="6">
-              <Form.Label>Name</Form.Label>
-              <Form.Control type="text" name="medname" placeholder="eg Revolution for Dogs" value={medname} onChange={this.onChange} />
-              </ Form.Group>
-              </Form.Row>
-              <Form.Row> 
-              <Form.Group as={Col} md="6" className="pb-5">
-                <Form.Control as="textarea" rows="3" name="mednotes" placeholder="Other notes you want to include" value={mednotes} onChange={this.onChange}/>
-                </Form.Group>
-              </Form.Row>
-           {/*Notes*/}
-              <h3 className="border-top pt-5 pb-3">Notes</h3>
-              <Form.Row> 
-              <Form.Group as={Col} md="6" className="pb-5">
-                <Form.Control as="textarea" rows="3" name="note" placeholder="Other notes you want to include" value={note} onChange={this.onChange}/>
-                </Form.Group>
-                </Form.Row>
-              {/*Gallery*/}
-              <h3 className="border-top pt-5 pb-3">Gallery</h3>
-                <Form.Row>
-                  <Form.Group>
-                  <label for="exampleFormControlFile1">Upload Gallery Photos</label>
-                       <input type="file" class="form-control-file" name="photo" value={photo} onChange={this.onChange}/>
+            <Form.Group as={Col}>
+            <label for="exampleFormControlFile1">Profile Pic URL</label>
+                  <Form.Control type="text" name="thumbnail" value={thumbnail} onChange={this.onChange} />
                   </Form.Group>
-                </Form.Row>
-
+          </Form.Row>
                 <div className="d-flex justify-content-center pt-2 pb-4 "> 
                 <button type="submit" value="Add Pet" name="addpet" class="btn btn-secondary mr-2">Submit</button>
                 <a href="/user"><button type="button" class="btn btn-secondary">Cancel</button></a>
@@ -221,8 +121,8 @@ onSubmit=(e) => {
     );
   }
 }
-AddPet.propTypes={
-  addPet: PropTypes.func.isRequired
+AddPet.propTypes={  
+  AddPet: PropTypes.func.isRequired
 }
 
-export default firestoreConnect()(AddPet);
+export default compose()(AddPet)

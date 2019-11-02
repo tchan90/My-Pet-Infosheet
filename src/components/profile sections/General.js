@@ -5,7 +5,6 @@ import {
     Col,
     Table,
   } from "react-bootstrap";
-import PropTypes from 'prop-types';
 
  class General extends Component {
 
@@ -39,7 +38,7 @@ import PropTypes from 'prop-types';
               </Col>
               <Col lg={6}>
                 <img
-                  src={profilepic}
+                  src={profilepic || "https://res.cloudinary.com/ddzbntqlz/image/upload/v1567493812/default-placeholder-general_feyzh3.png" } 
                   alt="profile pic"
                   className="ml-2 img-size rounded float-right"
                 />

@@ -224,12 +224,12 @@ export default compose(firestoreConnect(props=> [
   {
     collection: 'animals', storeAs:'animal',
     doc:props.match.params.id,
-    //subcollections:[
- // {collection: 'diet', doc:props.match.params.id}
+    subcollections:[
+ {collection: 'diet'}
   //{collection: 'medication', doc:props.match.params.id},
   //{collection: 'gallery', doc:props.match.params.id},
  // {collection:'notes', doc:props.match.params.id}
-//]
+]
 }]),
 connect(({firestore:{ordered}},props)=>({
   animal:ordered.animal && ordered.animal[0]
