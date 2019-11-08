@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Container, Col, Form,Breadcrumb} from 'react-bootstrap'
-import PropTypes from 'prop-types';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
@@ -19,15 +18,9 @@ import {firestoreConnect} from 'react-redux-firebase';
   onSubmit=(e) => {
     e.preventDefault();
    const newDiet = this.state;
-   // store
-   //.firestore()
-   //.collection("animals")
-   //.doc(this.props.match.params.id)
-   //.collection("diet")
-   //.add(newDiet)
-  const{firestore} = this.props;
+  const{pet,firestore} = this.props;
   firestore.add({collection:'animals', doc:this.props.match.params.id, subcollections:[{ collection: 'diet' }] }, newDiet)
-  .then(()=> this.props.history.push('/user'))
+  .then(()=> this.props.history.push(`/pet/${pet.id}`))
   };
    
     render() {
@@ -36,8 +29,8 @@ import {firestoreConnect} from 'react-redux-firebase';
         return (
           <div>
           <Breadcrumb>
-          <Breadcrumb.Item href="/user">All Pets</Breadcrumb.Item> 
-          {pet ? <Breadcrumb.Item href={`/pet/${pet.id}`}>{pet.name}</Breadcrumb.Item>:<p>No name</p>} 
+          <Breadcrumb.Item href="/pets">All Pets</Breadcrumb.Item> 
+          {pet ? <Breadcrumb.Item href={`/pet/${pet.id}`}>{pet.name}</Breadcrumb.Item>:<p>...</p>} 
     <Breadcrumb.Item active>Add Diet</Breadcrumb.Item>
        </Breadcrumb>
                 <Container className="my-5">
@@ -65,15 +58,12 @@ import {firestoreConnect} from 'react-redux-firebase';
                         <Form.Control as="textarea" rows="3" name="dietother" placeholder="Other notes you want to include" value={dietother} onChange={this.onChange}/>
                         </Form.Group>
                     </Form.Row>
-              <button type="submit" value ="Add Diet" name="adddiet" class="btn btn-secondary mr-2">Submit</button>
+              <button type="submit" value ="Add Diet" name="adddiet" className="btn btn-secondary mr-2">Submit</button>
                 </Form>
             </Container>
             </div>
         )
     }
-}
-AddDiet.propTypes={  
-  AddDiet: PropTypes.func.isRequired
 }
 export default compose(
   //props store as ID

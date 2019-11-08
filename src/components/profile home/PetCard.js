@@ -5,10 +5,9 @@ import {
   } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faDog, faCat} from "@fortawesome/free-solid-svg-icons";
-import PropTypes from 'prop-types';
+import {firestoreConnect} from 'react-redux-firebase';
  
 class PetCard extends Component {
- 
   render() {
     const {id, name, thumbnail, animal} = this.props.pet;
     return (
@@ -21,7 +20,6 @@ class PetCard extends Component {
          {name}</Card.Title>
        <div className="d-flex justify-content-center pt-4">
        <Link to={`/pet/${id}`}><Button variant="primary" className="mx-1">View</Button></Link>
-       <Button variant="danger" className="mx-1">Delete</Button>
        </div>
       
      </Card.Body>
@@ -31,5 +29,5 @@ class PetCard extends Component {
   }
 }
 
-export default PetCard;
+export default firestoreConnect()(PetCard);
 

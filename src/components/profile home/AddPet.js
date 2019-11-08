@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import {compose} from 'redux';
 import { Form, Col, Container, Breadcrumb } from "react-bootstrap";
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import {firestoreConnect} from 'react-redux-firebase';
+
 
 class AddPet extends Component {
   state={
@@ -50,7 +51,7 @@ onSubmit=(e) => {
   const newPet = {name, animal, breed, sex, dob, thumbnail};
   const{firestore} = this.props;
   firestore.add({collection:'animals'}, newPet)
-.then(()=> this.props.history.push('/user'))
+.then(()=> this.props.history.push('/pets'))
 };
 
   render() {
@@ -107,13 +108,13 @@ onSubmit=(e) => {
               <Form.Control type="date" name="dob" value={dob} onChange={this.onChange} />
             </Form.Group>
             <Form.Group as={Col}>
-            <label for="exampleFormControlFile1">Profile Pic URL</label>
+            <label>Profile Pic URL</label>
                   <Form.Control type="text" name="thumbnail" value={thumbnail} onChange={this.onChange} />
                   </Form.Group>
           </Form.Row>
                 <div className="d-flex justify-content-center pt-2 pb-4 "> 
-                <button type="submit" value="Add Pet" name="addpet" class="btn btn-secondary mr-2">Submit</button>
-                <a href="/user"><button type="button" class="btn btn-secondary">Cancel</button></a>
+                <button type="submit" value="Add Pet" name="addpet" className="btn btn-secondary mr-2">Submit</button>
+                <a href="/user"><button type="button" className="btn btn-secondary">Cancel</button></a>
                 </div>
         </Form>
       </Container>
@@ -125,4 +126,4 @@ AddPet.propTypes={
   AddPet: PropTypes.func.isRequired
 }
 
-export default compose()(AddPet)
+export default firestoreConnect()(AddPet);

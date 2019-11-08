@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Container, Row, Col, Form, Button} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
 import logo from '../../img/petinfo-logo.png';
-import Login from '../user/Login';
+import {Link} from 'react-router-dom'
 
 class Home extends Component {
   
@@ -12,7 +12,7 @@ class Home extends Component {
                     <Row className="vertical-align">
                         <Col lg="6"  className="ml-auto d-flex flex-column">
                         <div className="mx-auto"><img src={logo} alt='logo'/> </div>
-                        <div className="mx-auto"><Login/> </div> 
+                        <Link to="/pets" className="mainMenuBtn mx-auto">Enter Pet Database</Link>
                         </Col>
                     </Row>
                 </Container>

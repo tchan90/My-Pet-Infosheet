@@ -9,8 +9,8 @@ export default function Error() {
             <Container>
                 <Row>
                     <Col md={12} className="py-5 text-center">
-                        <h1>This page doesn't exist...</h1>
-                        <h4>Click <Link to="/user">here</Link> to go back to your profile page</h4>
+                        <h1 className="display-2">This page doesn't exist...</h1>
+                        <h4 className="display-4">Click <Link to="/pets" className="text-warning">here</Link> to go back to your profile page</h4>
                     </Col>
                 </Row>
                 <Container className="pt-5"> 

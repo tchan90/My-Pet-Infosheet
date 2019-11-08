@@ -1,7 +1,15 @@
 .content{
   flex: 1 0 auto;
   height: auto;
+  font-family: 'Lato', sans-serif;
 
+}
+
+a{
+  color:black;
+}
+a:hover{
+  color:grey;
 }
 
 .vertical-align{
@@ -9,6 +17,20 @@
   min-height:100vh;
   display: flex;
   align-items:center;
+}
+
+.mainMenuBtn{
+  padding:20px 30px 20px 30px;
+  margin-top:20px;
+  border:1px solid black;
+  font-size:30px;
+  border-radius:5px;
+}
+.mainMenuBtn:hover{
+  text-decoration: none;
+  color:rgb(24, 132, 255);
+  border:rgb(24, 132, 255) 1px solid;
+
 }
 
 .landing-bg{
@@ -190,6 +212,13 @@ border-radius:5px;
 
 .st6{
   animation: flash 1s ease-in-out alternate infinite;
+}
+
+.updateForms{
+  background-color:rgba(209, 209, 209,0.8);
+  border-radius:5px;
+  margin-top:10px;
+  padding: 10px 20px 10px 20px;
 }
 
 @keyframes flash{

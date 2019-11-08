@@ -29,10 +29,6 @@ import {
                       <td className="font-weight-bold">DOB:</td>
                       <td>{dob}</td>
                     </tr>
-                    <tr>
-                      <td className="font-weight-bold">Age:</td>
-                      <td></td>
-                    </tr>
                   </tbody>
                 </Table>
               </Col>

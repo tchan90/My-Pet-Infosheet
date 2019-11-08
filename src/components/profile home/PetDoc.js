@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-
 import {
     Container,
     Row,
@@ -32,14 +31,23 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 class PetDoc extends Component {
+  state={
+    age:null
+  }
+  onDeleteClick=()=>{
+    const{pet,firestore}=this.props;
+    firestore.delete({collection:'animals', doc:pet.id},)
+    .then(()=> this.props.history.push(`/pets`))
+  }
     render(){
+      const{age} = this.state;
         const{pet,diet,med,note,gallery} = this.props;
         if(pet){
             return (
                 <div>
                     <div className="pl-3">
           <Breadcrumb>
-            <Breadcrumb.Item href="/user">All Pets</Breadcrumb.Item> 
+            <Breadcrumb.Item href="/pets">All Pets</Breadcrumb.Item> 
       <Breadcrumb.Item active>{pet.name}</Breadcrumb.Item>
          </Breadcrumb>
         </div>
@@ -48,8 +56,9 @@ class PetDoc extends Component {
             <Row className="top-streak d-flex flex-row justify-content-between py-3 px-3">
               <FontAwesomeIcon icon={`${pet.animal}` === 'Dog' ? faDog : faCat } />
               <div className="d-flex"> 
-              <div><span className="mx-4"><FontAwesomeIcon icon={faPenNib} /></span>
-                     <span><FontAwesomeIcon icon={faTimes} /></span>
+              <div>
+                <Link to={`/editPetFile/${pet.id}`}><span className="mx-4"><FontAwesomeIcon icon={faPenNib} /></span></Link>
+                    <a href="#!"  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) {this.onDeleteClick()} } }><span><FontAwesomeIcon icon={faTimes} /></span></a> 
                       </div>
               </div>
             </Row>
@@ -62,7 +71,7 @@ class PetDoc extends Component {
             </Row>
           </header>
         </Container>
-        <General animal={pet.animal} breed={pet.breed} dob={pet.dob} name={pet.name} sex={pet.sex} profilepic={pet.thumbnail} />
+        <General age={age} animal={pet.animal} breed={pet.breed} dob={pet.dob} name={pet.name} sex={pet.sex} profilepic={pet.thumbnail} />
         <Container style={{ padding: 0 }} className="mt-2">
 <Accordion defaultActiveKey="0">
   <Card>
@@ -74,8 +83,8 @@ class PetDoc extends Component {
     </Accordion.Toggle>
      <Accordion.Collapse eventKey="0">
                 <Card.Body className="diet-bg">
-                {diet == null ? <div>No diet entered</div> : 
-                <Diet name={diet.dietname} type={diet.diettype} notes={diet.dietother}/>
+               {diet == null ? <div>No diet entered</div> : 
+                  <Diet diet={diet} petId={pet.id}/>
               }  
                   <div className="d-flex justify-content-center pt-4">
                     <Link to={`/addDiet/${pet.id}`} className="addLink" style={{cursor:"pointer"}}>
@@ -107,18 +116,18 @@ class PetDoc extends Component {
               </Accordion.Toggle>
               <Accordion.Collapse eventKey="1">
               <Card.Body className="med-bg">
-              {med == null ? <div>No medication entered</div> : 
-                <Medicine name={med.medname} type={med.medtype} notes={med.mednotes}/>
+              {med == null ?<div>No medication entered</div> : 
+                <Medicine med={med} petId={pet.id}/>
               }  
             <div className="d-flex justify-content-center pt-4">
-                    <a className="addLink" style={{cursor:"pointer"}}>
+                    <Link to={`/addMed/${pet.id}`}  className="addLink" style={{cursor:"pointer"}}>
                       <div className="icon-style">
                         <FontAwesomeIcon size="3x" icon={faPlusCircle} />
                       </div>
                       <div id="hide" className="pt-2">
                         <p>Add section</p>
                       </div>
-                    </a>
+                    </Link>
                   </div>
             </Card.Body>
             </Accordion.Collapse>
@@ -141,17 +150,17 @@ class PetDoc extends Component {
               <Accordion.Collapse eventKey="2">
               <Card.Body className="notes-bg">
               {note == null ? <div>No notes entered</div> : 
-                <Notes note={note.note}/>
+                <Notes note={note} petId={pet.id}/>
               }  
             <div className="d-flex justify-content-center pt-4">
-                    <a className="addLink" style={{cursor:"pointer"}}>
+                    <Link to={`/addNote/${pet.id}`} className="addLink" style={{cursor:"pointer"}}>
                       <div className="icon-style">
                         <FontAwesomeIcon size="3x" icon={faPlusCircle} />
                       </div>
                       <div id="hide" className="pt-2">
                         <p>Add section</p>
                       </div>
-                    </a>
+                    </Link>
                   </div>
             </Card.Body>
             </Accordion.Collapse>
@@ -165,26 +174,26 @@ class PetDoc extends Component {
           </div>
           <Row className="pt-4">
           {gallery == null ? <div>No photos entered</div> : 
-                <Gallery photo={gallery.photo}/>
+                <Gallery photo={gallery} petId={pet.id}/>
               }  
             </Row>
             <div className="d-flex justify-content-center pt-4">
-                    <a className="addLink" style={{cursor:"pointer"}}>
+                    <Link to={`/addPhoto/${pet.id}`} className="addLink" style={{cursor:"pointer"}}>
                       <div className="icon-style">
                         <FontAwesomeIcon size="3x" icon={faPlusCircle} />
                       </div>
                       <div id="hide" className="pt-2">
                         <p>Add section</p>
                       </div>
-                    </a>
+                    </Link>
                   </div>
         </Container> 
                 </div>
             )
         }else{
-            return <div class="d-flex justify-content-center py-5">
-            <div class="spinner-border" role="status">
-              <span class="sr-only">Loading...</span>
+            return <div className="d-flex justify-content-center py-5">
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
             </div>
           </div> 
         }
@@ -199,7 +208,6 @@ export default compose(
     //props store as ID
     firestoreConnect(props=>[
         {collection: 'animals', storeAs:'pet', doc:props.match.params.id,},
-        //subcollections
         {collection: 'animals', storeAs:'diet', doc:props.match.params.id,
       subcollections:[{collection:'diet'}]},
       {collection: 'animals', storeAs:'med', doc:props.match.params.id,
@@ -210,11 +218,11 @@ export default compose(
       subcollections:[{collection:'gallery'}]}
     ]),
     //retrieve by ID - destructuring
-    connect(({firestore:{ordered}},props)=>({
+    connect(({firestore:{ordered}},state)=>({
         pet:ordered.pet && ordered.pet[0],
-        diet:ordered.diet && ordered.diet[0],
-        med:ordered.med && ordered.med[0],
-        note:ordered.note && ordered.note[0],
-        gallery:ordered.gallery && ordered.gallery[0]
+        diet:ordered.diet,
+        med:ordered.med,
+        note:ordered.note,
+        gallery:ordered.gallery
     }))
 )(PetDoc)
