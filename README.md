@@ -1,15 +1,15 @@
-# My-Pet-Infosheet
-My Pet Infosheet is an app created as part of a project for school focusing on building a RESTful API using React and Firebase. The app is aimed for pet users where they can store and customise their pet's data online.
+# My Pet Infosheet
+My Pet Infosheet is an app created as part of a school project focusing on building a RESTful API using React and Firebase. The app is aimed for pet users where they can store and customise their pet's data online.
 
 ## Features
 ### View
-The user can view all the pets that have been added onto the database in the browse page ('/petfile') right after they enter through the home page. They can view each individual pet's profile page that include the general basic bio, photo, diet, medication, notes, and gallery sections.  
+The user can view all the pets that have been added onto the database in the browse page ('/pets') right after they enter through the home page. They can view each individual pet's profile page that includes their general basic bio, photo, diet, medication, notes, and gallery sections.  
 
-The owners section page documents the owner's information and all other owners involved. 
+The owners section page ('/owner') documents the owner's information and all other owners involved. 
 
 ### Add 
-Users can add their pets using a form that can be accessed on the general file page ('/petfile'). From there they can enter the general bio (name, breed, sex, dob, thumbnail image). 
-In the specific pet file, users can then add specific data according to the categories - diet, medication, notes, gallery. These are stored under the subcollections of the related pet document in Firebase. 
+Users can add their pets using a form that can be accessed on the browse page ('/pets'). From there they can enter the general bio (name, breed, sex, dob, thumbnail image). 
+In the pet file ('/pet/:id'), users can then add specific data according to the categories - diet, medication, notes, gallery. These are stored under the subcollections of the related pet document in Firebase. 
 
 In the owner's section, users can add owner information including first name, last name, email, and phone. 
 
@@ -21,13 +21,13 @@ In the owner's section, information of each owner can be editted.
 ### Delete
 The entire pet file can be deleted via clicking on the cross icon and confirming the action in the box. 
 
-In the owner's section, each owner can be deleted.
+In the owner's section, each owner can be deleted via the edit section ('/editOwner').
 
 ## Pages
 - Home Page 
-- Pet File - displays the card of each pet added. User can also add pet here.
-- Pet Document - all information about the pet is displayed when user views the card in the Pet File. They can add subcollections, edit and delete data here.
-- Owners Section - displays data of the owners. Can add, edit and delete data here.
+- Pet File ('/pets') - displays the card of each pet added. User can also add pet here.
+- Pet Document ('pet/:id') - all information about the pet is displayed when user views the card in the Pet File. They can add subcollections, edit and delete data here.
+- Owner Info ('/owner') - displays data of the owners. Can add, edit and delete data here.
 - About Page
 
 ## Installation

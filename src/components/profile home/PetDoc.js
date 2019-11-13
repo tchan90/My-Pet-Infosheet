@@ -22,6 +22,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDog,
   faCat,
+  faDragon,
   faComment,
   faPlusCircle,
   faBriefcaseMedical,
@@ -54,7 +55,7 @@ class PetDoc extends Component {
         <Container className="mt-4 heading-profile">
           <header>
             <Row className="top-streak d-flex flex-row justify-content-between py-3 px-3">
-              <FontAwesomeIcon icon={`${pet.animal}` === 'Dog' ? faDog : faCat } />
+              <FontAwesomeIcon icon={`${pet.animal}` === 'Dog' ? faDog : `${pet.animal}` === 'Cat' ? faCat : faDragon } />
               <div className="d-flex"> 
               <div>
                 <Link to={`/editPetFile/${pet.id}`}><span className="mx-4"><FontAwesomeIcon icon={faPenNib} /></span></Link>

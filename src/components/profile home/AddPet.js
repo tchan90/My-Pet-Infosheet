@@ -61,7 +61,7 @@ onSubmit=(e) => {
       <div>
       <div className="pl-3">
         <Breadcrumb>
-          <Breadcrumb.Item href="/user">All Pets</Breadcrumb.Item>
+          <Breadcrumb.Item href="/pets">All Pets</Breadcrumb.Item>
           <Breadcrumb.Item active>Add Pet</Breadcrumb.Item>
         </Breadcrumb>
       </div>
@@ -77,6 +77,7 @@ onSubmit=(e) => {
                 <option>...</option>
                 <option>Dog</option>
                 <option>Cat</option>
+                <option>Other</option>
               </Form.Control>
               {errors.animal && <div className="invalid-feedback">{errors.animal}</div>}
             </Form.Group>

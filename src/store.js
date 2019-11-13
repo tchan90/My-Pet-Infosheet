@@ -1,8 +1,10 @@
 import {createStore, combineReducers, compose} from 'redux';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
 import 'firebase/firestore';
 import {reactReduxFirebase, firebaseReducer} from 'react-redux-firebase';
 import {firestoreReducer, reduxFirestore} from 'redux-firestore';
+
 
 var firebaseConfig = {
     apiKey: "AIzaSyCKGIyt1SKXt0FflYHnQ0vGj6uqZLTgMz8",

@@ -32,7 +32,7 @@ class EditPet extends Component {
         }
         //update in firestore
         firestore.update({collection:'animals', doc:pet.id},updPet)
-        .then(()=> this.props.history.push(`/pet/${pet.id}`));
+        .then(()=> this.props.history.push('/pets'))
     }
     render() {
         const{pet} = this.props;
@@ -54,6 +54,7 @@ class EditPet extends Component {
                         <option>...</option>
                         <option>Dog</option>
                         <option>Cat</option>
+                        <option>Other</option>
                       </Form.Control>
                     </Form.Group>
                   <Form.Row>

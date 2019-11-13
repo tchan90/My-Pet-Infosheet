@@ -37,7 +37,7 @@ class EditPet extends Component {
           <Breadcrumb.Item active>Edit Diet</Breadcrumb.Item>
              </Breadcrumb>
                 <Container className="my-5">
-                <h1>Diet</h1>
+                <h1>Edit Diet</h1>
                 <Form className="bg-light px-3 py-3" onSubmit={this.onSubmit}>
                 <Form.Row>
                     <Col lg={6}>
