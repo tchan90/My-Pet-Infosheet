@@ -23,7 +23,7 @@ The entire pet file can be deleted via clicking on the cross icon and confirming
 
 In the owner's section, each owner can be deleted via the edit section ('/editOwner').
 
-## Pages
+## Main Pages
 - Home Page 
 - Pet File ('/pets') - displays the card of each pet added. User can also add pet here.
 - Pet Document ('pet/:id') - all information about the pet is displayed when user views the card in the Pet File. They can add subcollections, edit and delete data here.
