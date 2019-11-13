@@ -13,7 +13,6 @@ import Edit from './components/profile home/Edit';
 import EditDiet from './components/profile sections/editSections/editDiet';
 import EditMed from './components/profile sections/editSections/editMed';
 import EditNote from './components/profile sections/editSections/editNote';
-import EditGallery from './components/profile sections/editSections/editGallery';
 import PetDoc from './components/profile home/PetDoc'
 import Owner from './components/user/UserProfile';
 import Register from './components/user/Registration';
@@ -49,7 +48,6 @@ function App() {
        <Route path="/:id1/editDiet/:id2" exact component={EditDiet} />
        <Route path="/:id1/editMed/:id2" exact component={EditMed} />
        <Route path="/:id1/editNote/:id2" exact component={EditNote} />
-       <Route path="/:id1/editGallery/:id2" exact component={EditGallery} />
        <Route component={Error} />
        </Switch>
               </div>

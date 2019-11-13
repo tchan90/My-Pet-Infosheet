@@ -3,6 +3,7 @@ import {Container, Form,Breadcrumb,} from 'react-bootstrap';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
+import {Link} from 'react-router-dom'
 
 class EditNote extends Component {
     constructor(props){
@@ -38,6 +39,8 @@ class EditNote extends Component {
                   <Form.Control as="textarea" rows="3" name="note" placeholder="Other notes you want to include" defaultValue={note.note} ref={this.noteInput}/>
                   </Form.Group>
                   <button type="submit" value ="Add Note" name="addnote" class="btn btn-secondary mr-2">Submit</button>
+                  <Link to={`/pet/${this.props.match.params.id1}`}><button type="button" class="btn btn-secondary">Cancel</button>
+                        </Link>
                   </Form>
                   </Container>
             </div>

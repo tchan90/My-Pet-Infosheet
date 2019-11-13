@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
+import {Link} from 'react-router-dom'
 
 class EditPet extends Component {
     constructor(props){
@@ -87,7 +88,8 @@ class EditPet extends Component {
                   </Form.Row>
                         <div className="d-flex justify-content-center pt-2 pb-4 "> 
                         <button type="submit" value="Add Pet" name="addpet" class="btn btn-secondary mr-2">Submit</button>
-                        <a href="/pets"><button type="button" class="btn btn-secondary">Cancel</button></a>
+                        <Link to={`/pet/${pet.id}`}><button type="button" class="btn btn-secondary">Cancel</button>
+                        </Link>
                         </div>
                 </Form>
               </Container>

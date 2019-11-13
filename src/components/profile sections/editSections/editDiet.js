@@ -3,6 +3,7 @@ import {Container, Col, Form,Breadcrumb,Button} from 'react-bootstrap';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
+import {Link} from 'react-router-dom'
 
 class EditPet extends Component {
     constructor(props){
@@ -63,6 +64,8 @@ class EditPet extends Component {
                         </Form.Group>
                     </Form.Row>
               <Button variant="secondary" type="submit" value ="Add Diet" name="adddiet" className="mr-2">Submit</Button>
+              <Link to={`/pet/${this.props.match.params.id1}`}><button type="button" class="btn btn-secondary">Cancel</button>
+                        </Link>
                 </Form>
             </Container>
             </div>

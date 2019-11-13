@@ -3,6 +3,7 @@ import { Form, Col, Container, Breadcrumb } from "react-bootstrap";
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import {firestoreConnect} from 'react-redux-firebase';
+import {Link} from 'react-router-dom'
 
 
 class AddPet extends Component {
@@ -114,7 +115,7 @@ onSubmit=(e) => {
           </Form.Row>
                 <div className="d-flex justify-content-center pt-2 pb-4 "> 
                 <button type="submit" value="Add Pet" name="addpet" className="btn btn-secondary mr-2">Submit</button>
-                <a href="/user"><button type="button" className="btn btn-secondary">Cancel</button></a>
+                <Link to="/pets"><button type="button" className="btn btn-secondary">Cancel</button></Link>
                 </div>
         </Form>
       </Container>
