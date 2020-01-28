@@ -15,13 +15,13 @@ import EditMed from './components/profile sections/editSections/editMed';
 import EditNote from './components/profile sections/editSections/editNote';
 import PetDoc from './components/profile home/PetDoc'
 import Owner from './components/user/UserProfile';
-import Register from './components/user/Registration';
+import AddOwner from './components/user/AddOwner';
 import EditOwner from './components/user/EditOwner';
 import AddDiet from './components/add sections/AddDiet';
 import AddMed from './components/add sections/AddMed';
 import AddNote from './components/add sections/AddNote';
 import AddGallery from './components/add sections/AddGallery';
-import Error from './components/Error'
+import Error from './components/Error';
 
 
 
@@ -37,7 +37,7 @@ function App() {
        <Route path="/pets" exact component={PetFile} />
      <Route path="/pet/:id" component={PetDoc}/>
        <Route path="/owner" exact component={Owner} />
-       <Route path="/register" exact component={Register} />
+       <Route path="/addOwner" exact component={AddOwner} />
        <Route path="/editOwner/:id" exact component={EditOwner} />
        <Route path="/AddPet" exact component={AddPet} />
        <Route path="/addDiet/:id" exact component={AddDiet} />

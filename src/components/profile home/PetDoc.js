@@ -59,7 +59,7 @@ class PetDoc extends Component {
               <div className="d-flex"> 
               <div>
                 <Link to={`/editPetFile/${pet.id}`}><span className="mx-4"><FontAwesomeIcon icon={faPenNib} /></span></Link>
-                    <a href="#!"  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) {this.onDeleteClick()} } }><span><FontAwesomeIcon icon={faTimes} /></span></a> 
+                    <a href="#!"  onClick={() => { if (window.confirm('Are you sure you wish to delete this file?')) {this.onDeleteClick()} } }><span><FontAwesomeIcon icon={faTimes} /></span></a> 
                       </div>
               </div>
             </Row>

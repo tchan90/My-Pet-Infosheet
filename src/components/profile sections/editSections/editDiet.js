@@ -3,7 +3,11 @@ import {Container, Col, Form,Breadcrumb,Button} from 'react-bootstrap';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTimes
+} from "@fortawesome/free-solid-svg-icons";
 
 class EditPet extends Component {
     constructor(props){
@@ -26,6 +30,12 @@ class EditPet extends Component {
         firestore.update({collection:'animals', doc:this.props.match.params.id1,subcollections:[{ collection: 'diet', doc:this.props.match.params.id2}]},updPet)
         .then(()=> this.props.history.push(`/pet/${this.props.match.params.id1}`));
     }
+onDeleteClick=()=>{
+//delete in firestore
+const{firestore}=this.props;
+firestore.delete({collection:'animals', doc:this.props.match.params.id1,subcollections:[{ collection: 'diet', doc:this.props.match.params.id2}]})
+.then(()=> this.props.history.push(`/pet/${this.props.match.params.id1}`));
+    }
     render() {
         const{diet,pet} = this.props;
         if(diet){
@@ -38,11 +48,15 @@ class EditPet extends Component {
              </Breadcrumb>
                 <Container className="my-5">
                 <h1>Edit Diet</h1>
+                <div className="d-flex justify-content-end">
+                <a href="#!"  onClick={() => { if (window.confirm('Are you sure you wish to delete this entry?')) {this.onDeleteClick()} } }><span><FontAwesomeIcon icon={faTimes} /></span> <span>Delete Entry</span></a> 
+                </div>
                 <Form className="bg-light px-3 py-3" onSubmit={this.onSubmit}>
                 <Form.Row>
                     <Col lg={6}>
                     <Form.Group>
                    <Form.Label>Meal Type</Form.Label>
+            <p className="p-1 font-italic">Current: {diet.diettype}</p>
                    <Form.Control as="select" name="diettype" 
                    ref={this.diettypeInput} defaultValue={diet.diettype}>
                         <option>...</option>

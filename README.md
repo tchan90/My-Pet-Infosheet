@@ -19,7 +19,7 @@ Users can edit information in their pet file in sections - general bio, diet, me
 In the owner's section, information of each owner can be editted.
 
 ### Delete
-The entire pet file can be deleted via clicking on the cross icon and confirming the action in the box. 
+The entire pet file can be deleted via clicking on the cross icon and confirming the action in the box. Each entry inside the pet file can also be deleted by entering the edit page and clicking the 'Delete Entry' link on the top right.
 
 In the owner's section, each owner can be deleted via the edit section ('/editOwner').
 

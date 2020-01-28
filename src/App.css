@@ -10,6 +10,7 @@ a{
 }
 a:hover{
   color:grey;
+  text-decoration:none;
 }
 
 .vertical-align{
@@ -188,7 +189,6 @@ p{
 .notes-head:hover{
   background-color: rgb(137, 158, 197);
   cursor:pointer;
-
 }
 
 .notes-bg{

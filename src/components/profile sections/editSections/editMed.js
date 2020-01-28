@@ -3,7 +3,11 @@ import {Container, Col, Form,Breadcrumb} from 'react-bootstrap';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTimes
+} from "@fortawesome/free-solid-svg-icons";
 
 class EditMed extends Component {
     constructor(props){
@@ -26,6 +30,12 @@ class EditMed extends Component {
         firestore.update({collection:'animals', doc:this.props.match.params.id1,subcollections:[{ collection: 'meds', doc:this.props.match.params.id2}]},updPet)
         .then(()=> this.props.history.push(`/pet/${this.props.match.params.id1}`));
     }
+    onDeleteClick=()=>{
+      //delete in firestore
+      const{firestore}=this.props;
+      firestore.delete({collection:'animals', doc:this.props.match.params.id1,subcollections:[{ collection: 'meds', doc:this.props.match.params.id2}]})
+      .then(()=> this.props.history.push(`/pet/${this.props.match.params.id1}`));
+          }
     render() {
         const{med,pet} = this.props;
         if(med){
@@ -38,10 +48,14 @@ class EditMed extends Component {
              </Breadcrumb>
              <Container className="my-5">
                 <h1>Edit Medication</h1>
+                <div className="d-flex justify-content-end">
+                <a href="#!"  onClick={() => { if (window.confirm('Are you sure you wish to delete this entry?')) {this.onDeleteClick()} } }><span><FontAwesomeIcon icon={faTimes} /></span> <span>Delete Entry</span></a> 
+                </div>
                 <Form className="bg-light px-3 py-3" onSubmit={this.onSubmit}>
                 <Form.Row>
           <Form.Group as={Col} md="6"> 
           <Form.Label>Type</Form.Label>
+          <p className="p-1 font-italic">Current: {med.medtype}</p>
         <Form.Control as="select" name="medtype" defaultValue={med.medtype} ref={this.medtypeInput}>
                   <option>...</option>
                   <option>Parasite Control</option>

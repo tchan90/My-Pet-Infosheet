@@ -3,7 +3,11 @@ import {Container, Form,Breadcrumb,} from 'react-bootstrap';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTimes
+} from "@fortawesome/free-solid-svg-icons";
 
 class EditNote extends Component {
     constructor(props){
@@ -22,6 +26,12 @@ class EditNote extends Component {
         firestore.update({collection:'animals', doc:this.props.match.params.id1,subcollections:[{ collection: 'notes', doc:this.props.match.params.id2}]},updPet)
         .then(()=> this.props.history.push(`/pet/${this.props.match.params.id1}`));
     }
+    onDeleteClick=()=>{
+      //delete in firestore
+      const{firestore}=this.props;
+      firestore.delete({collection:'animals', doc:this.props.match.params.id1,subcollections:[{ collection: 'notes', doc:this.props.match.params.id2}]})
+      .then(()=> this.props.history.push(`/pet/${this.props.match.params.id1}`));
+          }
     render() {
         const{note,pet} = this.props;
         if(note){
@@ -34,6 +44,9 @@ class EditNote extends Component {
              </Breadcrumb>
              <Container className="my-5">
                 <h1>Edit Note</h1>
+                <div className="d-flex justify-content-end">
+                <a href="#!"  onClick={() => { if (window.confirm('Are you sure you wish to delete this entry?')) {this.onDeleteClick()} } }><span><FontAwesomeIcon icon={faTimes} /></span> <span>Delete Entry</span></a> 
+                </div>
                 <Form className="bg-light px-3 py-3" onSubmit={this.onSubmit}>
                 <Form.Group> 
                   <Form.Control as="textarea" rows="3" name="note" placeholder="Other notes you want to include" defaultValue={note.note} ref={this.noteInput}/>

@@ -2,6 +2,7 @@ import {createStore, combineReducers, compose} from 'redux';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/firestore';
+import 'firebase/auth';
 import {reactReduxFirebase, firebaseReducer} from 'react-redux-firebase';
 import {firestoreReducer, reduxFirestore} from 'redux-firestore';
 

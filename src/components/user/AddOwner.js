@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {Container, Col, Row, Form, Button} from 'react-bootstrap';
-import uuid from 'uuid';
 import {firestoreConnect} from 'react-redux-firebase';
 import classnames from 'classnames';
 import {Link} from 'react-router-dom'
 
-class Registration extends Component {
+class AddOwner extends Component {
   state={
     firstName:"",
     lastName:"",
@@ -46,7 +45,7 @@ class Registration extends Component {
       }
       return;
     }
-    const newOwner = { firstName, lastName, email, phone, uuid:uuid()};
+    const newOwner = { firstName, lastName, email, phone};
     const{firestore} = this.props;
     firestore.add({collection:'users'}, newOwner)
   .then(()=> this.props.history.push('/owner'))
@@ -95,4 +94,4 @@ class Registration extends Component {
   }
 }
 
-export default firestoreConnect()(Registration);
+export default firestoreConnect()(AddOwner);

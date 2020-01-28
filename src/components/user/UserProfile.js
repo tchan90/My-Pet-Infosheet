@@ -52,7 +52,7 @@ class UserProfile extends Component {
        </div>
     ))}
  
-                    <Link to="/register"><Button className="mt-5 mb-3" variant="warning">Add Owner</Button></Link>
+                    <Link to="/addOwner"><Button className="mt-5 mb-3" variant="warning">Add Owner</Button></Link>
 
                 </Container>
             </div>

@@ -1,0 +1,26 @@
+[debug] [2019-11-18T07:21:59.777Z] ----------------------------------------------------------------------
+[debug] [2019-11-18T07:21:59.779Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Tammy\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2019-11-18T07:21:59.779Z] CLI Version:   7.7.0
+[debug] [2019-11-18T07:21:59.779Z] Platform:      win32
+[debug] [2019-11-18T07:21:59.779Z] Node Version:  v10.16.0
+[debug] [2019-11-18T07:21:59.780Z] Time:          Mon Nov 18 2019 18:21:59 GMT+1100 (Australian Eastern Daylight Time)
+[debug] [2019-11-18T07:21:59.780Z] ----------------------------------------------------------------------
+[debug] [2019-11-18T07:21:59.780Z] 
+[debug] [2019-11-18T07:21:59.785Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-11-18T07:21:59.786Z] > authorizing via signed-in user
+[debug] [2019-11-18T07:21:59.786Z] [iam] checking project my-pet-info-sheet for permissions ["firebase.projects.get"]
+[debug] [2019-11-18T07:21:59.787Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/my-pet-info-sheet:testIamPermissions  
+
+[debug] [2019-11-18T07:22:01.435Z] <<< HTTP RESPONSE 200
+[debug] [2019-11-18T07:22:01.442Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/my-pet-info-sheet  
+ 
+[debug] [2019-11-18T07:22:02.131Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Tammy\Documents\Projects\Github\My-Pet-Infosheet'...
+[info] 
+[debug] [2019-11-18T07:22:02.206Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/my-pet-info-sheet/webApps/-/config  
+ 
+[debug] [2019-11-18T07:22:03.427Z] <<< HTTP RESPONSE 200
+[warn] !  hosting: Port 5000 is not available. Trying another port...
+[info] i  hosting: Serving hosting files from: build
+[info] +  hosting: Local server: http://localhost:5005
