@@ -34,6 +34,15 @@ a:hover{
 
 }
 
+.navLinks{
+  padding-left:10px;
+  padding-right:10px;
+  color:rgb(221, 221, 221);
+}
+.navLinks:hover{
+  color:rgb(146, 146, 146);
+}
+
 .landing-bg{
   background:url('./img/landing-bg.png');
   background-repeat:no-repeat;
