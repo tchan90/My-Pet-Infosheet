@@ -3,7 +3,9 @@ import {Container, Col, Row, Form, Button} from 'react-bootstrap';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 
 class EditOwner extends Component {
     constructor(props){
@@ -88,6 +90,12 @@ onDeleteClick=()=>{
    
   }
 }
+
+EditOwner.propTypes={
+  firestore:PropTypes.object.isRequired,
+  users: PropTypes.array
+}
+
   export default compose(
     //props store as ID
     firestoreConnect(props=>[ 

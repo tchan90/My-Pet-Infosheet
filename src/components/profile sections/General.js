@@ -5,6 +5,8 @@ import {
     Col,
     Table,
   } from "react-bootstrap";
+  import PropTypes from 'prop-types';
+
 
  class General extends Component {
 
@@ -44,6 +46,10 @@ import {
                 </div>
         )
     }
+}
+
+General.propTypes={
+  photo: PropTypes.array,
 }
 
 export default General

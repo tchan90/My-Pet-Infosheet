@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTimes
 } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from 'prop-types';
 
 class EditNote extends Component {
     constructor(props){
@@ -51,8 +52,8 @@ class EditNote extends Component {
                 <Form.Group> 
                   <Form.Control as="textarea" rows="3" name="note" placeholder="Other notes you want to include" defaultValue={note.note} ref={this.noteInput}/>
                   </Form.Group>
-                  <button type="submit" value ="Add Note" name="addnote" class="btn btn-secondary mr-2">Submit</button>
-                  <Link to={`/pet/${this.props.match.params.id1}`}><button type="button" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" value ="Add Note" name="addnote" className="btn btn-secondary mr-2">Submit</button>
+                  <Link to={`/pet/${this.props.match.params.id1}`}><button type="button" className="btn btn-secondary">Cancel</button>
                         </Link>
                   </Form>
                   </Container>
@@ -66,6 +67,10 @@ class EditNote extends Component {
           </div> 
         }  
     }
+}
+EditNote.propTypes={
+  firestore:PropTypes.object.isRequired,
+  animals: PropTypes.array
 }
 
   export default compose(

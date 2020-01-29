@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Form, Col, Container, Breadcrumb } from "react-bootstrap";
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import {firestoreConnect} from 'react-redux-firebase';
 import {Link} from 'react-router-dom'
 
@@ -123,9 +122,6 @@ onSubmit=(e) => {
     </div>
     );
   }
-}
-AddPet.propTypes={  
-  AddPet: PropTypes.func.isRequired
 }
 
 export default firestoreConnect()(AddPet);

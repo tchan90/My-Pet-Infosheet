@@ -65,6 +65,7 @@ import {firestoreConnect} from 'react-redux-firebase';
         )
     }
 }
+
 export default compose(
   //props store as ID
   firestoreConnect(props=>[

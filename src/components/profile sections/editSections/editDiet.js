@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTimes
 } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from 'prop-types';
 
 class EditPet extends Component {
     constructor(props){
@@ -78,7 +79,7 @@ firestore.delete({collection:'animals', doc:this.props.match.params.id1,subcolle
                         </Form.Group>
                     </Form.Row>
               <Button variant="secondary" type="submit" value ="Add Diet" name="adddiet" className="mr-2">Submit</Button>
-              <Link to={`/pet/${this.props.match.params.id1}`}><button type="button" class="btn btn-secondary">Cancel</button>
+              <Link to={`/pet/${this.props.match.params.id1}`}><button type="button" className="btn btn-secondary">Cancel</button>
                         </Link>
                 </Form>
             </Container>
@@ -93,6 +94,11 @@ firestore.delete({collection:'animals', doc:this.props.match.params.id1,subcolle
         }  
     }
 }
+EditPet.propTypes={
+  firestore:PropTypes.object.isRequired,
+  animals: PropTypes.array
+}
+
   export default compose(
     //props store as ID
     firestoreConnect(props=>[ 

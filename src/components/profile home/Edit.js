@@ -83,13 +83,13 @@ class EditPet extends Component {
                       <Form.Control type="date" name="dob" defaultValue={pet.dob} ref={this.dobInput} />
                     </Form.Group>
                     <Form.Group as={Col}>
-                    <label for="exampleFormControlFile1">Profile Pic URL</label>
+                    <label>Profile Pic URL</label>
                           <Form.Control type="text" name="thumbnail" defaultValue={pet.thumbnail} ref={this.thumbnailInput}/>
                           </Form.Group>
                   </Form.Row>
                         <div className="d-flex justify-content-center pt-2 pb-4 "> 
-                        <button type="submit" value="Add Pet" name="addpet" class="btn btn-secondary mr-2">Submit</button>
-                        <Link to={`/pet/${pet.id}`}><button type="button" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" value="Add Pet" name="addpet" className="btn btn-secondary mr-2">Submit</button>
+                        <Link to={`/pet/${pet.id}`}><button type="button" className="btn btn-secondary">Cancel</button>
                         </Link>
                         </div>
                 </Form>
@@ -106,7 +106,7 @@ class EditPet extends Component {
     }
 }
 EditPet.propTypes={  
-    EditPet: PropTypes.func.isRequired
+    animals:  PropTypes.array
   }
   export default compose(
     //props store as ID
